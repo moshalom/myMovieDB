@@ -1,0 +1,14 @@
+
+<div class="moviesList" >
+
+  <input matInput placeholder="Type your search" #searchInput autocomplete="off">
+  
+  <movie *ngFor="let movie of movies"
+      [movie]="movie"
+      (movieOverViewSelected)="onMovieOverViewSelect($event)"
+      >
+      
+  </movie>
+
+
+</div>

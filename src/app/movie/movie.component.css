@@ -1,0 +1,86 @@
+.movie-box {
+    margin-bottom: 40px;
+    margin-left: 40px;
+    text-align: center;
+    border-radius: 4px;
+    padding: 20px 0;
+    box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .2), 0 2px 8px 0 rgba(0, 0, 0, .14), 0 4px 8px -1px rgba(0, 0, 0, .12);
+    height: 500px;
+    width: 400px;
+    float: left;
+}
+  
+
+.movie-box .movie-title {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+
+
+.movie-box .movie-overview {
+    color: #4d4d4d;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    text-align: left;
+    white-space: nowrap;
+    max-width: 460px;
+    max-height: 100px;
+    margin: 0 auto;    
+    margin: 5px 5px 10px 10px;    
+    user-select: none;
+    
+    display: inline-block;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    
+  }
+
+    /* styles for '...' */ 
+    .block-with-text {
+        /* Over flow hidden hides the text if it is more than N lines  */
+        overflow: hidden;
+        /* To set '...' in absolute position */
+        position: relative; 
+        /* Use this value to count block height */
+        line-height: 1.2em;
+        /* Max-height = line-height (1.2) * lines max number (2) */
+        max-height: 2.4em; 
+        /* If the last visible word doesn't adjoin right side then this will fix the problem */
+        text-align: justify !important;  
+        /* place for '...' */
+        padding-right: 40px;
+        padding-left: 1em;
+        }
+    
+        /* create the ... */
+        .movie-overview:before {
+        /* points in the end */
+        content: '...';
+        /* absolute position */
+        position: absolute;
+        /* set position to right bottom corner of block */
+        right: 20px;
+        bottom: 0;
+        }
+    
+        /* hide ... if we have text, which is less than or equal to max lines */
+        .movie-overview:after {
+        /* points in the end */
+        content: '';
+        /* absolute position */
+        position: absolute;
+        /* set position to right bottom corner of text */
+        right: 20px;
+        /* set width and height */
+        width: 1em;
+        height: 1em;
+        margin-top: 0.2em;
+        /* bg color = bg color under block */
+        background: white;
+        }
