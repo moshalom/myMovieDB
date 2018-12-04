@@ -12,13 +12,17 @@
   
 
 .movie-box .movie-title {
-    font-size: 27px;
+    font-size: 20em;
+    font-size: 1.5vw;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(110, 86, 136);
+    
 }
 
 
 
-.movie-box .movie-overview {
+/*.movie-box .movie-overview {
     color: #4d4d4d;
     font-size: 1.3em;
     line-height: 1.5em;
@@ -39,10 +43,14 @@
     text-overflow: ellipsis;
 
     
-  }
+  }*/
 
     /* styles for '...' */ 
-    .block-with-text {
+    .movie-overview {
+        max-width: 460px;
+        font-size:18px;
+        font-family: 'Times New Roman', Times, serif;
+        color: rgb(88, 82, 72);
         /* Over flow hidden hides the text if it is more than N lines  */
         overflow: hidden;
         /* To set '...' in absolute position */
@@ -50,7 +58,7 @@
         /* Use this value to count block height */
         line-height: 1.2em;
         /* Max-height = line-height (1.2) * lines max number (2) */
-        max-height: 2.4em; 
+        max-height: 3.4em; 
         /* If the last visible word doesn't adjoin right side then this will fix the problem */
         text-align: justify !important;  
         /* place for '...' */

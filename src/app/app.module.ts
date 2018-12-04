@@ -7,7 +7,7 @@ import { MovieComponent } from './movie/movie.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {FilterByNamePipe} from './pipes/filter-by-name.pipe';
 import { MaterialModule } from './material.module';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { MaterialModule } from './material.module';
     AppComponent,
     MoviesListComponent,
     MovieComponent,
-    MovieOverviewComponent
+    MovieOverviewComponent,
+    FilterByNamePipe
     
   ],
   imports: [
@@ -23,6 +24,9 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule
+  ],
+  exports:[
+    FilterByNamePipe
   ],
   providers: [],
   bootstrap: [AppComponent]

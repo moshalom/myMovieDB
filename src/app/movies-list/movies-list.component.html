@@ -1,12 +1,11 @@
 
-<div class="moviesList" >
-
-  <input matInput placeholder="Type your search" #searchInput autocomplete="off">
+<input matInput placeholder="Type your search" #searchInput autocomplete="off">
   
-  <movie *ngFor="let movie of movies"
-      [movie]="movie"
-      (movieOverViewSelected)="onMovieOverViewSelect($event)"
-      >
+<div class="moviesList" *ngIf="movies$ | async as movies"  #moviesList (scroll)="onScroll($event)">
+
+  
+  <movie *ngFor="let movie of movies | FilterByNamePipe: searchInput.value"
+      [movie]="movie">
       
   </movie>
 

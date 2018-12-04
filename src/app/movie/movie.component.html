@@ -1,5 +1,17 @@
+<!--
 <div class="movie-box">
-  <img width="300px" height="300px" alt="Poster"
+  <mat-card>
+    <img mat-card-image  width="300px" height="300px" src= "{{ 'https://image.tmdb.org/t/p/w500' + movie.poster_path }}" >
+    <mat-card-title> {{ movie.title }}</mat-card-title>
+
+    <mat-card-content>
+      <p>{{movie.overview}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+-->
+<div class="movie-box">
+  <img width="350px" height="300px" alt="Poster"
     src= "{{ 'https://image.tmdb.org/t/p/w500' + movie.poster_path }}" 
     (click)="onMovieOverViewSelect(movie)"
     >
