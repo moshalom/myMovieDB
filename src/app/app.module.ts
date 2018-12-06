@@ -17,7 +17,6 @@ import { MaterialModule } from './material.module';
     MovieComponent,
     MovieOverviewComponent,
     FilterByNamePipe
-    
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,7 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule
   ],
   exports:[
-    FilterByNamePipe
+    FilterByNamePipe,
   ],
   providers: [],
   bootstrap: [AppComponent]

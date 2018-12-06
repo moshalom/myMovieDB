@@ -1,13 +1,16 @@
 
-<input matInput placeholder="Type your search" #searchInput autocomplete="off">
-  
-<div class="moviesList" *ngIf="movies$ | async as movies"  #moviesList (scroll)="onScroll($event)">
+<div class="movies-list">
+  <mat-form-field class="search-bar">
+    <input matInput placeholder="Type your search" #searchInput autocomplete="off">
+  </mat-form-field>
+  <div class="moviesList" *ngIf="movies$ | async as movies"  #moviesList (scroll)="onScroll($event)">
 
-  
-  <movie *ngFor="let movie of movies | FilterByNamePipe: searchInput.value"
-      [movie]="movie">
-      
-  </movie>
+    
+    <movie *ngFor="let movie of movies | FilterByNamePipe: searchInput.value"
+        [movie]="movie">
+        
+    </movie>
 
 
+  </div>
 </div>
