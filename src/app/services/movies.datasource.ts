@@ -6,25 +6,23 @@ import {tap, concatMap } from 'rxjs/operators';
 
 export class MoviesDataSource implements DataSource<Movie> {
     
-    private moviesSubject = new ReplaySubject<Movie[]>(4);
+    private moviesSubject = new BehaviorSubject<Movie[]>([]);
 
     constructor ( private moviesService : MoviesService )
     {
 
     }
     getMostPopular(page: string) {
-        console.log (this.moviesSubject);
         
-       this.moviesService.getMostPopular(page)
-       
+        let latstList: Movie[] = this.moviesSubject.getValue();
+        this.moviesService.getMostPopular(page)
         .subscribe(
-            movies => this.moviesSubject.next(movies)
+            movies => this.moviesSubject.next(latstList.concat(movies))
             );
-            console.log ("sss " + this.moviesSubject);
+            console.log (this.moviesSubject);
     }
 
     connect (): Observable <Movie[]> {
-        console.log ("aaaaa");
         return this.moviesSubject.asObservable();
     }
 
