@@ -11,15 +11,18 @@ export class MovieComponent implements OnInit {
   @Input()
   movie: Movie;
 
+  @Input()
+  index: number;
+
   constructor() { }
 
   ngOnInit() {
     
   }
 
-  onMovieOverViewSelect(movie: Movie )
+  onMovieOverViewSelect( )
   {
-    console.log ("onMovieOverViewSelect - " + movie.title )
+    console.log ("onMovieOverViewSelect - " + this.movie.title + "(" + this.index +")")
   }
 
 }

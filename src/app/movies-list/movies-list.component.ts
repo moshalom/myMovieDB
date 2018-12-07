@@ -4,8 +4,8 @@ import {map, debounceTime, distinctUntilChanged,tap } from 'rxjs/operators';
 import { MoviesService } from '../services/movies.service';
 import { MoviesDataSource } from '../services/movies.datasource'
 import { Movie } from '../models/movie';
-import { Element } from '@angular/compiler/src/render3/r3_ast';
-import { debounce } from 'rxjs/operators';
+
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'movies-list',
@@ -16,6 +16,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
 
   @Input()
     movie: Movie;
@@ -26,7 +27,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   movies$ : Observable <Movie[]>;
   dataSource: MoviesDataSource;
 
- // @HostListener("window:scroll", ["$event"])
+  @HostListener("window:scroll", ["$event"])
   onScroll() {
     //In chrome and some browser scroll is given to body tag
     let min = document.documentElement.scrollTop + document.documentElement.clientHeight +1  ;
@@ -36,39 +37,19 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
       console.log("End Of Page");
       this.page++; 
       this.dataSource.getMostPopular(this.page.toString());
-        
-      
       document.documentElement.scrollTop = min;
      }
   }
-  loadMore()
-  {
-    this.page++; 
-    console.log ("load more " + this.page);
-    
-      //this.dataSource.getMostPopular(this.page.toString());
-      this.dataSource.getMostPopular(this.page.toString());
+ 
 
-      
-  }
   constructor(private moviesServies: MoviesService) { }
   
   ngOnInit() {
     this.page =1;
-    //this.movies$ = this.moviesServies.getMostPopular(this.page.toString());
-   
     this.dataSource = new MoviesDataSource(this.moviesServies);
     this.dataSource.getMostPopular(this.page.toString());
     this.movies$ = this.dataSource.connect();
- 
-    /*this.movies$.pipe
-   tap(() => this.dataSource.getMostPopular(this.page.toString()))
-   ).subscribe();*/
- //this.movies$ = this.moviesServies.getMostPopular(this.page.toString());
- //this.movies$.subscribe();
-    //this.movies_temp$ = this.movies$;
-
-    
+    this.setPageSizeOptions("5, 10, 25, 100");
   }
 
   ngAfterViewInit(){
@@ -84,7 +65,18 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
       
   }
 
-  
+  loadMore()
+  {
+    this.page++; 
+    console.log ("load more " + this.page);
+      //this.dataSource.getMostPopular(this.page.toString());
+      this.dataSource.getMostPopular(this.page.toString());
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    //this.length = parseInt(this.moviesServies.getTotalPages)
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
 
 
 

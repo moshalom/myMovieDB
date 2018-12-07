@@ -12,9 +12,9 @@ import {
   MatExpansionModule,
   MatSidenavModule,
   MatListModule,
+
   
-  
-  
+
 } from '@angular/material';
 
 @NgModule({
@@ -29,6 +29,8 @@ import {
     MatSidenavModule,
     MatListModule,
     MatPaginatorModule
+    
+    
 
     
   ],
@@ -42,7 +44,8 @@ import {
     MatExpansionModule,
     MatSidenavModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    
   ]    
 })
 

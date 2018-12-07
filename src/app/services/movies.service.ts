@@ -7,6 +7,7 @@ import { tap, map, shareReplay, catchError } from 'rxjs/operators';
 import { Movie } from '../models/movie';
 
 import { logger,LogginLevel }  from '../common/logger';
+import { ThrowStmt } from '@angular/compiler';
  
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class MoviesService {
   api_key="3d565f32541bd5e570bada729cceb3cb";
   movies$ : Observable <Movie[]>;
   total_pages :number;
+  total_results: number;
   constructor(private http: HttpClient) { }
 
   getMovieDetail()
@@ -34,8 +36,12 @@ export class MoviesService {
 
     return this.http.get<Movie[]>(apiReq,{params})
       .pipe(
-            //tap(console.log),
-            map (res => Object.values( res["results"]))
+            tap(console.log),
+            tap(v=> this.total_pages = v["total_pages"]),
+            tap(v=> this.total_results = v["total_results"]),
+            map (res => Object.values( res["results"])),
+           
+            //map(res=> this.total_results = res["total_results"]),
       );
   }
 
@@ -48,5 +54,16 @@ export class MoviesService {
           //map (res => Object.values( res["results"])),
     );
   }
+
+  getTotalPages(): number
+  {
+    return this.total_pages;
+  }
+
+  getTotalResults() :number
+  {
+    return this.total_results;
+  }
+
 
 }

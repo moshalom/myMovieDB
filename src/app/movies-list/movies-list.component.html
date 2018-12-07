@@ -1,19 +1,23 @@
 
 
-  <mat-form-field class="search-bar">
-    <input matInput placeholder="Type your search" #searchInput autocomplete="off">
-  </mat-form-field>
-  <button mat-raised-button (click)="loadMore()">Load more</button>
+<mat-form-field class="search-bar">
+  <input matInput placeholder="Type your search" #searchInput autocomplete="off">
+</mat-form-field>
+<button mat-raised-button (click)="loadMore()">Load more</button>
+
+<div class="moviesList" *ngIf="movies$ | async as movies"  #moviesList (scroll)="onScroll($event)" >
   
-  <div class="moviesList" *ngIf="movies$ | async as movies"  #moviesList (scroll)="onScroll($event)" >
-   
-    <movie *ngFor="let movie of movies | FilterByNamePipe: searchInput.value" class="movie-card"
-        [movie]="movie">
-        
+    <movie *ngFor="let movie of movies | FilterByNamePipe: searchInput.value ;  let idx =index" class="movie-card"
+        [movie]="movie"
+        [index]="idx">
     </movie>
     
-  </div>
-  <mat-paginator [length]="lentgh" [pageSize]="pageSize">
+</div>
+<mat-paginator 
+  [length]="length" 
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="loadMore()">
 
-    </mat-paginator>
+</mat-paginator>
 
