@@ -1,3 +1,10 @@
+.movie-card {
+    width: 440px;
+    height: 480px;
+    margin: 20px 10px;
+    float: left;
+}
+
 .movie-box {
     margin-bottom: 40px;
     margin-left: 40px;
@@ -7,7 +14,7 @@
     box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .2), 0 2px 8px 0 rgba(0, 0, 0, .14), 0 4px 8px -1px rgba(0, 0, 0, .12);
     height: 420px;
     width: 400px;
-    float: left;
+    
 }
   
 
@@ -32,7 +39,7 @@ position: relative;
 /* Use this value to count block height */
 line-height: 1.2em;
 /* Max-height = line-height (1.2) * lines max number (2) */
-max-height: 3.4em; 
+max-height: 2.4em; 
 /* If the last visible word doesn't adjoin right side then this will fix the problem */
 text-align: justify !important;  
 /* place for '...' */

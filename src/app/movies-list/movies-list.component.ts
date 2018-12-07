@@ -13,6 +13,10 @@ import { debounce } from 'rxjs/operators';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit, AfterViewInit {
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
   @Input()
     movie: Movie;
 
@@ -22,11 +26,12 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   movies$ : Observable <Movie[]>;
   dataSource: MoviesDataSource;
 
-  @HostListener("window:scroll", ["$event"])
-  onWindowScroll() {
+ // @HostListener("window:scroll", ["$event"])
+  onScroll() {
     //In chrome and some browser scroll is given to body tag
     let min = document.documentElement.scrollTop + document.documentElement.clientHeight +1  ;
     let atBottom = min >= document.documentElement.offsetHeight
+    console.log ("min = " + min + ", d= " + document.documentElement.offsetHeight);
      if(atBottom)   {
       console.log("End Of Page");
       this.page++; 
@@ -36,15 +41,27 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
       document.documentElement.scrollTop = min;
      }
   }
+  loadMore()
+  {
+    this.page++; 
+    console.log ("load more " + this.page);
+    
+      //this.dataSource.getMostPopular(this.page.toString());
+      this.dataSource.getMostPopular(this.page.toString());
+
+      
+  }
   constructor(private moviesServies: MoviesService) { }
   
   ngOnInit() {
     this.page =1;
     //this.movies$ = this.moviesServies.getMostPopular(this.page.toString());
+   
     this.dataSource = new MoviesDataSource(this.moviesServies);
     this.dataSource.getMostPopular(this.page.toString());
     this.movies$ = this.dataSource.connect();
- /*this.movies$.pipe
+ 
+    /*this.movies$.pipe
    tap(() => this.dataSource.getMostPopular(this.page.toString()))
    ).subscribe();*/
  //this.movies$ = this.moviesServies.getMostPopular(this.page.toString());

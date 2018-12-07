@@ -1,12 +1,12 @@
 import { DataSource, CollectionViewer } from "@angular/cdk/collections";
-import { Observable, BehaviorSubject, concat } from "rxjs";
+import { Observable, BehaviorSubject, concat,ReplaySubject } from "rxjs";
 import { Movie } from '../models/movie';
 import {tap, concatMap } from 'rxjs/operators';
  import { MoviesService } from './movies.service';
 
 export class MoviesDataSource implements DataSource<Movie> {
     
-    private moviesSubject = new BehaviorSubject<Movie[]>([]);
+    private moviesSubject = new ReplaySubject<Movie[]>(4);
 
     constructor ( private moviesService : MoviesService )
     {
@@ -14,15 +14,13 @@ export class MoviesDataSource implements DataSource<Movie> {
     }
     getMostPopular(page: string) {
         console.log (this.moviesSubject);
-       this.moviesService.getMostPopular(page).pipe(
-        tap(movies=> console.log("xxx " + movies)),
         
-       )
+       this.moviesService.getMostPopular(page)
+       
         .subscribe(
- 
             movies => this.moviesSubject.next(movies)
             );
-            console.log (this.moviesSubject);
+            console.log ("sss " + this.moviesSubject);
     }
 
     connect (): Observable <Movie[]> {
